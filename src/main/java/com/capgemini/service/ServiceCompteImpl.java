@@ -31,7 +31,7 @@ public class ServiceCompteImpl implements IServiceCompte {
 
 	@Override
 	public Compte rechercherCompteParNumero(Long numero) {
-		return daoCompte.findCompteByNum(numero);
+		return daoCompte.findOne(numero);
 	}
 
 	@Override
@@ -43,11 +43,11 @@ public class ServiceCompteImpl implements IServiceCompte {
 	//@Transactional ici ou au dessus de la classe
 	public void transferer(double montant, Long numCptDeb, Long numCptCred) {
 		try {
-			Compte cptDeb = daoCompte.findCompteByNum(numCptDeb);
+			Compte cptDeb = daoCompte.findOne(numCptDeb);
 			cptDeb.setSolde(cptDeb.getSolde()-montant);
 			//daoCompte.updateCompte(cptDeb);//automatique avec @Transactional
 			
-			Compte cptCred = daoCompte.findCompteByNum(numCptCred);
+			Compte cptCred = daoCompte.findOne(numCptCred);
 			cptCred.setSolde(cptCred.getSolde()+montant);
 			//daoCompte.updateCompte(cptCred);//necessaire que si pas de @Transactional
 		} catch (Exception e) {

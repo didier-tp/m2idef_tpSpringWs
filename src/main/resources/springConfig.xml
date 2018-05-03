@@ -30,7 +30,7 @@
 	<import resource="./h2DatasourceConfig.xml"/> <!-- pour l'instant sans profile , plus tard avec profile "h2" -->
 	
 	
-	<bean id="myEmf"
+	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="myDataSource" />
 		<!-- ok avec hibernate 4 et aussi avec hibernate 5 sans autre probleme -->
@@ -44,9 +44,9 @@
 		 --> 
 	</bean>
 
-	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="myEmf" />
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-	<tx:annotation-driven transaction-manager="txManager" />
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
 </beans>

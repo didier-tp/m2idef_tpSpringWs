@@ -24,28 +24,27 @@ public class ServiceClientImpl implements IServiceClient{
 
 	@Override
 	public Client rechercherClientParNumero(Long numero) {
-		return daoClient.findClientByNum(numero);
+		return daoClient.findOne(numero);
 	}
 
 	@Override
 	public List<Client> rechercherTousClient() {
-		return daoClient.findAllClients();
+		return (List<Client>) daoClient.findAll();
 	}
 
 	@Override
 	public Client creerClient(Client c) {
-		return daoClient.createClient(c);
+		return daoClient.save(c);//au sens saveOrUpdate()
 	}
 
 	@Override
 	public void modifierClient(Client c) {
-		daoClient.updateClient(c);
+		daoClient.save(c);//au sens saveOrUpdate()
 	}
 
 	@Override
 	public void supprimerClient(long numClient) {
-		Client c = daoClient.findClientByNum(numClient);
-		daoClient.deleteClient(c);
+		daoClient.delete(numClient);
 	}
 
 }
