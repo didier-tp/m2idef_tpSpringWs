@@ -2,6 +2,8 @@ package com.capgemini.dao;
 
 import java.util.List;
 
+import org.springframework.data.repository.CrudRepository;
+
 import com.capgemini.entity.Compte;
 
 /*
@@ -12,11 +14,22 @@ import com.capgemini.entity.Compte;
  * 
  * avec throws RuntimeException implicites
  */
-public interface IDaoCompte {
-   public Compte findCompteByNum(Long numero);
-   public List<Compte> findComptesDuClient(Long numClient);
-   public Compte createCompte(Compte c);//return compte with auto_incr pk
-   public void updateCompte(Compte c);
-   public void deleteCompte(Compte c);
-   //...
+
+//public interface IDaoCompte extends JpaRepository<Compte,Long>{
+public interface IDaoCompte extends CrudRepository<Compte,Long>{
+ /* méthodes héritées:
+	   ... findOne(...)
+	   .... findAll()
+	   ...save(...)
+	   ...delete(...)
+  */
+	//NB le code d'une méthode de recherche simple findByLabel() 
+	//peut être généré automatiquement
+	public List<Compte> findByLabel(String label);
+	
+	//NB: le code d'une méthode de recherche complexe peut (en JPA)
+	//être codé comme un @NameQuery de nom "Compte.findComptesDuClient"
+	public List<Compte> findComptesDuClient(Long numClient);
 }
+
+

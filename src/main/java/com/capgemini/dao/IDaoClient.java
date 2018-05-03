@@ -2,6 +2,8 @@ package com.capgemini.dao;
 
 import java.util.List;
 
+import org.springframework.data.repository.CrudRepository;
+
 import com.capgemini.entity.Client;
 
 /*
@@ -11,12 +13,17 @@ import com.capgemini.entity.Client;
  * avec methodes "CRUD" (avec souvent du SQL)
  * 
  * avec throws RuntimeException implicites
+ * 
+ * JpaRepository herite de CrudRepository (encore plus abstrait)
  */
-public interface IDaoClient {
-   public Client findClientByNum(Long numero);
-   public List<Client> findAllClients();
-   public Client createClient(Client c);//return Client with auto_incr pk
-   public void updateClient(Client c);
-   public void deleteClient(Client c);
-   //...
+
+//public interface IDaoClient extends JpaRepository<Client,Long>{
+public interface IDaoClient extends CrudRepository<Client,Long>{
+   /* méthodes héritées:
+  	   ... findOne(...)
+  	   .... findAll()
+  	   ...save(...)
+  	   ...delete(...)
+    */
+
 }
