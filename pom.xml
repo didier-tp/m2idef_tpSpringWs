@@ -85,6 +85,12 @@
 		   <!-- version conseille par spring-boot-starter-parent -->
 		</dependency>
 		
+		<dependency>
+		    <groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-jpa</artifactId>
+		     <!-- pour DAO automatiques -->
+		   <!-- version conseille par spring-boot-starter-parent -->
+		</dependency>
 		
 		
 		<dependency>

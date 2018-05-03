@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
@@ -7,7 +8,9 @@
 	http://www.springframework.org/schema/aop 
 	http://www.springframework.org/schema/aop/spring-aop.xsd 
 	http://www.springframework.org/schema/tx 
-	http://www.springframework.org/schema/tx/spring-tx.xsd 
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/data/jpa     
+	http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
 	http://www.springframework.org/schema/context 
 	http://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -16,8 +19,11 @@
 
 	<context:component-scan base-package="com.capgemini.service" />
 
-	<!-- <context:component-scan base-package="com.capgemini.dao.simu" /> -->
-	<context:component-scan base-package="com.capgemini.dao.jpa" />
+    <!-- demander à spring-data de générer automatiquement les DAOs
+         dont les interfaces sont dans le package précisé -->
+    <jpa:repositories    base-package="com.capgemini.dao" /> 
+     
+	
 
     <import resource="./mysqlDatasourceConfig.xml"/> <!-- avec profile "mysql" -->
 	
