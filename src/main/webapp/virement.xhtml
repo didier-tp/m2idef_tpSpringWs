@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="templates/common.xhtml">
+    <ui:define name="title">virement</ui:define>
+	<ui:define name="header">virement</ui:define>
+	<ui:define name="content">
+	    <h:messages globalOnly="true" />
+	    <h:form>
+	       montant : <h:inputText value="#{virementMBean.montant}" /> <br/>
+	       numCptDeb : 
+	         <!-- <h:inputText value="#{virementMBean.numCptDeb}" /> -->
+	         <h:selectOneMenu value="#{virementMBean.numCptDeb}">
+	              <f:selectItems value="#{clientComptesMBean.comptes}" 
+	               		var="c"  itemValue="#{c.numero}" 
+	               		itemLabel="#{c.numero} - #{c.label} - #{c.solde}"/>
+	         </h:selectOneMenu> 
+	       <br/>
+	       numCptCred : 
+	       <!-- <h:inputText value="#{virementMBean.numCptCred}" /> -->
+	       <h:selectOneMenu value="#{virementMBean.numCptCred}">
+	              <f:selectItems value="#{clientComptesMBean.comptes}" 
+	               		var="c"  itemValue="#{c.numero}" 
+	               		itemLabel="#{c.numero} - #{c.label} - #{c.solde}"/>
+	         </h:selectOneMenu> 
+	       <br/>
+	       <h:commandButton value="effectuer virement" 
+	          action="#{virementMBean.virement}" />
+	    </h:form>
+	</ui:define>
+</ui:composition>
+</html>
