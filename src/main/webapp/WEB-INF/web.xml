@@ -18,8 +18,8 @@
 		<!-- ce qui est placé dans src/main/java et src/main/resources est recopié 
 			dans /WEB-INF/classes si .xml ou .properties -->
 		<param-name>contextConfigLocation</param-name>
-		<!-- <param-value>/WEB-INF/classes/springConfig.xml</param-value> -->
-		<param-value>classpath:/springConfig.xml</param-value>
+		<!-- <param-value>/WEB-INF/classes/springConfigWeb.xml</param-value> -->
+		<param-value>classpath:/springConfigWeb.xml</param-value>
 	</context-param>
 
 	<listener>
