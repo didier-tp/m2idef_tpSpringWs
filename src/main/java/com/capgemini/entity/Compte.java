@@ -11,6 +11,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="compte")
 @NamedQueries(
@@ -28,6 +30,7 @@ public class Compte {
 		private Double solde;
 		//...
 		
+		@JsonIgnore
 		@ManyToOne  //un ou plusieurs comptes pour un client
 		@JoinColumn(name="refClient")//nom de la colonne clef étrangère (fk)
 		private Client client; //avec get/set

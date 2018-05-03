@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="client")
 public class Client {
@@ -29,6 +31,7 @@ public class Client {
 	    private String adresse;
 		//...
 	    
+	    @JsonIgnore
 	    @OneToMany(mappedBy="client",fetch=FetchType.LAZY) //un client peut avoir un ou plusieurs comptes
 	    //mapped="nom_java_de_la_relation_many_to_one_inverse"
 	    private List<Compte> comptes;//avec get/set
