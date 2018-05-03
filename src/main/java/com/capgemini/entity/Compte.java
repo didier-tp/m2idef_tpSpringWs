@@ -7,10 +7,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="compte")
+@NamedQueries(
+ @NamedQuery(name="Compte.findComptesDuClient" , 
+            query="SELECT cpt FROM Compte cpt WHERE cpt.client.numero = ?1")
+)
 public class Compte {
 	    @Id
 	    @GeneratedValue(strategy=GenerationType.IDENTITY)
