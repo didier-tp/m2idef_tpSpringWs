@@ -1,0 +1,51 @@
+   <html >
+    <head>
+	<script src="jquery-2.2.1.js"></script>
+    <script>
+	  var compteList;
+	  var numClient;
+	  
+      $(function() {
+	 	  
+	    
+		$('#btnSearch').on('click',function(){
+		  
+			numClient = $('#txtNumClient').val();
+		
+			$.ajax({
+		           type: "GET",
+		           url: "mvc/rest/compte/duClient?numClient=" + numClient,
+				   success: function (data,status,xhr) {
+		               if (data) {
+					       //alert(JSON.stringify(data));
+					       compteList = data;
+						   for(index in compteList){
+						       var cpt=compteList[index];
+						       //alert(JSON.stringify(cpt));
+						       $('#selComptes').append('<option  value="'+ cpt.numero +'">'+ cpt.numero + '-' + cpt.label + '-' + cpt.solde +'</option>');					   
+						   }
+						   $("#spanMsg").html( "message in the bottle : " + JSON.stringify(compteList) ) ;
+		               } else {
+		                   $("#spanMsg").html("Cannot GET comptes du client !");
+		               }
+		           }
+				   });
+	
+			
+			
+		});
+		
+      }); 
+   </script>
+   </head>
+     <body>
+	  
+	  numClient : <input id="txtNumClient" type='text' /><br/>
+	  <input type='button' value="rechercher comptes" id="btnSearch"/> <br/>
+	  <span id="spanMsg"></span> <br/>
+	  <hr/>
+	  liste comptes : <select id="selComptes"> </select>
+	  <hr/>
+	  <a href="index.html">retour vers index.html</a>
+	  </body>
+     </html>
