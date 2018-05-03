@@ -14,17 +14,17 @@
 	</welcome-file-list>
 
 	<context-param>
-	    <!--  endroit (vu par tomcat) du fichier de config spring à charger en mémoire -->
-	    <!-- ce qui est placé dans src/main/java et src/main/resources
-	         est recopié dans /WEB-INF/classes si .xml ou .properties  -->
+		<!-- endroit (vu par tomcat) du fichier de config spring à charger en mémoire -->
+		<!-- ce qui est placé dans src/main/java et src/main/resources est recopié 
+			dans /WEB-INF/classes si .xml ou .properties -->
 		<param-name>contextConfigLocation</param-name>
 		<!-- <param-value>/WEB-INF/classes/springConfig.xml</param-value> -->
 		<param-value>classpath:/springConfig.xml</param-value>
 	</context-param>
 
 	<listener>
-	    <!-- pour charger en mémoire la config Spring au démararrage de l'appli
-	         dans tomcat -->
+		<!-- pour charger en mémoire la config Spring au démararrage de l'appli 
+			dans tomcat -->
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
@@ -51,6 +51,25 @@
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.jsf</url-pattern>
+	</servlet-mapping>
+
+
+   <!-- DispatcherServlet est utile pour la technologie 
+        Spring-Web-Mvc qui sert à developper les WebServices REST
+        (@RestController) -->
+	<servlet>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value></param-value>
+			<!-- <param-value>/WEB-INF/mvc-config.xml</param-value> -->
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<url-pattern>/mvc/*</url-pattern>
 	</servlet-mapping>
 
 
