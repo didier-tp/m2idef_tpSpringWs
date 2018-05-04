@@ -1,5 +1,7 @@
 package com.capgemini.config;
 
+import java.util.Properties;
+
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
@@ -63,6 +65,9 @@ public class DomainAndPersistenceConfig {
 		factory.setJpaVendorAdapter(jpaVendorAdapter);
 		factory.setPackagesToScan("com.capgemini.entity");
 		factory.setDataSource(dataSource);
+		Properties jpaProperties = new Properties();
+		jpaProperties.put("hibernate.hbm2ddl.auto", "create");
+		jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
 		factory.afterPropertiesSet();
 		return factory.getObject();
 	}
