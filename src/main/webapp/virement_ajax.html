@@ -1,0 +1,56 @@
+   <html >
+    <head>
+	<script src="jquery-2.2.1.js"></script>
+    <script> 
+      $(function() {
+	 	  
+	    
+		$('#btnVirement').on('click',function(){
+		  
+			var ordreVirement = {
+					montant : 0 ,
+					numCptDeb : 0 ,
+					numCptCred : 0 
+			}; //avec valeurs par défaut
+			
+			ordreVirement.montant = $('#txtNumCptDeb').val();
+			ordreVirement.numCptDeb = $('#txtNumCptDeb').val();
+			ordreVirement.numCptCred = $('#txtNumCptCred').val();
+		
+			$.ajax({
+		           type: "POST",
+		           url: "mvc/rest/compte/virement" ,
+		           contentType : "application/json" ,
+		           dataType: "json", 
+		           data: JSON.stringify(ordreVirement), 
+				   success: function (data,status,xhr) {
+		               if (data) {
+						   $("#spanMsg").html( "WebService result (JSON): " + JSON.stringify(data) ) ;
+		               } else {
+		                   $("#spanMsg").html("echec virement");
+		               }
+		           },
+		           error: function(xhr, status, error){
+		        	   $("#spanMsg").html( "status:" + status + " error : " + error ) ;
+		           }
+				   });
+	
+			
+			
+		});
+		
+      }); 
+   </script>
+   </head>
+     <body>
+	   montant : <input id="txtMontant" type='text' /><br/>
+	   numCptDeb : <input id="txtNumCptDeb" type='text' /><br/>
+	   numCptCred : <input id="txtNumCptCred" type='text' /><br/>
+	  <input type='button' value="effectuer virement" id="btnVirement"/> <br/>
+	  <span id="spanMsg"></span> <br/>
+	  <hr/>
+	  <a href="comptes_jquery_rest_json.html">retour vers liste des comptes</a>
+	  <hr/>
+	  <a href="index.html">retour vers index.html</a>
+	  </body>
+     </html>

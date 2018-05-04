@@ -17,17 +17,22 @@
 		           url: "mvc/rest/compte/duClient?numClient=" + numClient,
 				   success: function (data,status,xhr) {
 		               if (data) {
+		            	   $('#tabComptes').empty();
+		            	   $('#tabComptes').append('</tr><tr><th>numero</th><th>label</th><th>solde</th></tr>');
 					       //alert(JSON.stringify(data));
 					       compteList = data;
 						   for(index in compteList){
 						       var cpt=compteList[index];
 						       //alert(JSON.stringify(cpt));
-						       $('#selComptes').append('<option  value="'+ cpt.numero +'">'+ cpt.numero + '-' + cpt.label + '-' + cpt.solde +'</option>');					   
+						       $('#tabComptes').append('<tr><td>'+ cpt.numero + '</td><td>' + cpt.label + '</td><td>' + cpt.solde +'</td></tr>');					   
 						   }
-						   $("#spanMsg").html( "message in the bottle : " + JSON.stringify(compteList) ) ;
+						   $("#spanMsg").html( "WebService result (JSON): " + JSON.stringify(compteList) ) ;
 		               } else {
 		                   $("#spanMsg").html("Cannot GET comptes du client !");
 		               }
+		           },
+		           error: function(xhr, status, error){
+		        	   $("#spanMsg").html( "status:" + status + " error : " + error ) ;
 		           }
 				   });
 	
@@ -44,7 +49,11 @@
 	  <input type='button' value="rechercher comptes" id="btnSearch"/> <br/>
 	  <span id="spanMsg"></span> <br/>
 	  <hr/>
-	  liste comptes : <select id="selComptes"> </select>
+	  liste comptes : <table border="1" id="tabComptes"> 
+	                      <tr><th>numero</th><th>label</th><th>solde</th></tr>
+	                   </table>
+	  <hr/>
+	   <a href="virement_ajax.html">virement (js/ajax + WS REST POST)</a>
 	  <hr/>
 	  <a href="index.html">retour vers index.html</a>
 	  </body>
